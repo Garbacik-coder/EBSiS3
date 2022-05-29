@@ -52,7 +52,8 @@ shifted_impulse = signal.unit_impulse(7, 2)
 # plt.show()
 
 # ustalenie dziedziny czasu
-def create_linspace(timeOfObservation, numberOfSamples):
+def create_linspace(timeOfObservation, f):
+    numberOfSamples = f * timeOfObservation
     return np.linspace(0, timeOfObservation, numberOfSamples)
 
 
@@ -72,9 +73,18 @@ def print_sin_function(sig, t):
     plt.show()
 
 
-t = create_linspace(4, 100)
-sig1 = create_sin_signal(t, 5, 1, 0)
-sig2 = create_sin_signal(t, 5, 1, np.pi/2)
+amplitude = 5
+f = 1.0
+t = create_linspace(4, 50)
+sig1 = amplitude * np.sin(2 * np.pi * f * t)
+sig2 = amplitude * np.sin(2 * np.pi * f * t + np.pi)
 
-sig3 = (sig1+sig2)
+sig3 = np.add(sig1, sig2)
 print_sin_function(sig3, t)
+# plt.plot(t, sig1, linewidth=3, label='Sine1 wave')
+# plt.plot(t, sig2, linewidth=3, label='Sine2 wave')
+# plt.xlabel('time.', fontsize=15)
+# plt.ylabel('Amplitude', fontsize=15)
+# plt.legend(fontsize=10, loc='upper right')
+# plt.show()
+
